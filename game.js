@@ -6,14 +6,26 @@ const playerPattern = [];
 var currlevel=0;
 var pos=0;
 var failed=false;
-function start(){
-    if(failed===false){document.addEventListener("keydown",function(){
-        updatePattern();
-    })} else {
+var time = 0
 
-    }
+function Test()
+{
+    updatePattern();
+}
+
+function start(){
+    
+        document.addEventListener("keydown",Test)
+        time = 1
+    
+    
+    
 }
 function updatePattern(){
+    if(time == 1){
+        document.removeEventListener("keydown",Test)
+        time = -1
+    }
     currlevel++;
     pos=0;
     playerPattern.length=0;
@@ -43,6 +55,7 @@ function verify(){
     } else{
         failed=true;
         currlevel=0;
+        time = 0
         pos=0;
         gamePattern.length=0;
         playerPattern.length=0;
@@ -52,7 +65,7 @@ function verify(){
             $("body").removeClass("game-over");
         }, 200);
         playAudio("wrong");
-        start();
+        start()
     }
 }
 function bAnimate(color){
